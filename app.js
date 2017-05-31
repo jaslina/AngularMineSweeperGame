@@ -150,7 +150,7 @@ gameApp.controller("MinesweeperController",['$scope',function($scope){
         spot.y = j;
         spot.content = "empty";
         spot.isCovered = true;
-        spot.nearby: 0,
+        spot.nearby= 0,
         row.spots.push(spot);
       }
 
@@ -162,7 +162,6 @@ gameApp.controller("MinesweeperController",['$scope',function($scope){
   }
   $scope.minefield = createMinefield();
   $scope.uncoverSpot = function(spot){
-    //getAdjList(spot);
     spot.isCovered = false;
 
     if(spot.content === "mine"){
@@ -181,15 +180,16 @@ gameApp.controller("MinesweeperController",['$scope',function($scope){
   }
   function nearBySpotReveal(spot){
 
-    if(spot.content === "empty"){
+
+    if(spot.content != "mine"){
+      spot.isCovered = false;
+      return;
+    }
+    else if(spot.content === "empty"){
       spot.isCovered = false;
       uncoverBonus(spot);
       return;
 
-    }
-    else if(spot.content != "mine"){
-      spot.isCovered = false;
-      return;
     }
     else
       return;
